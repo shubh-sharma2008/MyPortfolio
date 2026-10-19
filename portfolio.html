@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio | Shubh Sharma</title>
+
+    <!-- =====================================================
+         INTERNAL CSS (Slide 5): CSS written inside <style>
+         in the <head> section of this one HTML page.
+         (My old code used EXTERNAL CSS: <link rel="stylesheet" href="1.css">
+          which is also fine - see Slide 6)
+         ===================================================== -->
+    <style>
+
+        /* ---------- 1. UNIVERSAL SELECTOR  *  (Slide 9) ----------
+           Selects EVERY element on the page.
+           I used it to remove default spacing and set one font everywhere. */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* ---------- 2. ELEMENT SELECTORS (Slide 8) ----------
+           Target every element of a given HTML tag. */
+        body {
+            background: #f0f4ff;
+            color: #1f2937;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 { color: #1e3a8a; font-size: 26px; }
+        h2 { color: #1e3a8a; font-size: 22px; margin-bottom: 12px; }
+        h3 { color: #1d4ed8; font-size: 17px; margin-bottom: 6px; }
+        p  { font-size: 15px; margin-bottom: 8px; }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: #dbe4ff;
+            margin: 24px 0;
+        }
+
+        /* ---------- GROUPING SELECTOR  ,  (Slide 12) ----------
+           Same style applied to many tags at once. */
+        header, main, footer {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+        }
+
+        header, section, footer {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        section { margin-bottom: 24px; }
+
+        /* ---------- 3. CLASS SELECTOR  .class  (Slide 10) ----------
+           Selects every element having that class name. */
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #3b82f6;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            position: relative;
+            background: #f8faff;
+            border: 1px solid #dbe4ff;
+            border-radius: 12px;
+            padding: 18px;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .status {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 13px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
+        .bordered-form {
+            border: 2px solid #dbe4ff;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        /* ---------- 4. ID SELECTOR  #id  (Slide 11) ----------
+           Selects ONE unique element (an id can be used only once). */
+        #about {
+            border-left: 6px solid #2563eb;
+        }
+
+        #contact {
+            border-top: 6px solid #2563eb;
+        }
+
+        /* ---------- 5. DESCENDANT SELECTOR  (space)  (Slide 14) ----------
+           Selects elements INSIDE other elements. */
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        nav ul li a {
+            display: block;
+            background: #e0e7ff;
+            color: #3730a3;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        .card h3 { color: #1d4ed8; }
+
+        #skills ul { list-style: none; }
+
+        #skills ul li {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px 6px 4px 0;
+            font-size: 14px;
+        }
+
+        /* ---------- 6. ATTRIBUTE SELECTOR  [attribute]  (Slide 13) ----------
+           Selects elements by an HTML attribute (here: type="..."). */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* ---------- 7. :hover PSEUDO-CLASS  (Slide 17) ----------
+           Styles an element when the mouse is over it. */
+        nav ul li a:hover {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn:hover { background: #1e40af; }
+
+        #skills ul li:hover {
+            background: #3730a3;
+            color: #ffffff;
+        }
+
+        footer a:hover { color: #f59e0b; }
+
+        /* ---------- 8. :focus PSEUDO-CLASS ----------
+           Styles an input when the user clicks / types in it. */
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        /* ---------- 9. :first-child PSEUDO-CLASS  (Slide 15) ----------
+           Selects the FIRST child among sibling elements. */
+        .card-grid .card:first-child {
+            border-left: 5px solid #2563eb;
+        }
+
+        #skills ul li:first-child {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        /* ---------- 10. ::before and ::after PSEUDO-ELEMENTS  (Slide 16) ----------
+           Insert content before / after an element using CSS only. */
+        .featured {
+            border: 2px solid #f59e0b;
+            background: #fffbeb;
+        }
+
+        .featured::before {              /* "Featured Course" badge */
+            content: "★ Featured Course";
+            position: absolute;
+            top: -12px;
+            right: 14px;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        h2::after {                      /* small blue line under every h2 */
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #3b82f6;
+            margin-top: 6px;
+        }
+
+        footer { text-align: center; }
+        footer a { color: #2563eb; margin: 0 6px; }
+
+        /* ---------- EXTRA CSS used by JavaScript ---------- */
+        html { scroll-behavior: smooth; }          /* smooth scroll for nav links */
+
+        .progress {                                /* progress bar track */
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 20px;
+            margin: 6px 0 12px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {                           /* bar filled by JavaScript */
+            height: 100%;
+            width: 0;
+            background: #2563eb;
+            transition: width 0.4s;
+        }
+
+        .form-msg {                                /* message shown after submit */
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .form-msg.success { color: #15803d; }
+        .form-msg.error   { color: #b91c1c; }
+
+        .counter { font-size: 12px; text-align: right; color: #6b7280; }
+
+        .theme-btn { margin-top: 10px; }
+
+        /* Dark mode: JavaScript adds class "dark" to <body> */
+        body.dark { background: #0f172a; color: #e5e7eb; }
+        body.dark header, body.dark section, body.dark footer { background: #1e293b; }
+        body.dark .card { background: #273449; border-color: #3b4a63; }
+        body.dark .card.featured { background: #3a3320; }
+        body.dark h1, body.dark h2 { color: #93c5fd; }
+        body.dark h3, body.dark .card h3 { color: #bfdbfe; }
+        body.dark .progress { background: #3b4a63; }
+        body.dark input[type="text"], body.dark input[type="email"], body.dark textarea {
+            background: #0f172a; color: #e5e7eb; border-color: #3b4a63;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1><strong>Shubh Sharma</strong> | Computer Science Student | Lovely Professional University</h1>
+
+        <!-- Profile image (class selector .profile-pic styles it) -->
+        <div style="text-align: right;">
+            <img class="profile-pic"
+                 src="RAYA.jpg.jpeg"
+                 alt="Shubh Sharma" width="180" height="180">
+        </div>
+
+        <!-- Dark mode button (JavaScript: toggleTheme) -->
+        <button class="btn theme-btn" id="themeBtn" type="button">🌙 Dark Mode</button>
+
+        <!-- Navigation (styled with the descendant selector: nav ul li a) -->
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Featured Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Introduction (ID selector #about) -->
+        <section id="about">
+            <h2>Hi, I'm Shubh Sharma</h2>
+            <p>I am a passionate <strong>Computer Science Undergraduate</strong> focusing on web development and system design.
+                I enjoy learning new skills.</p>
+        </section>
+
+        <!-- Course Section (at least 3 cards, 1 featured - as per TASK slide) -->
+        <section id="courses">
+            <h2>My Courses</h2>
+            <div class="card-grid">
+
+                <!-- class "featured" => ::before adds the Featured Course badge -->
+                <div class="card featured" data-progress="50">
+                    <h3>Web Development</h3>
+                    <p>Learn HTML and CSS to build and style responsive websites.</p>
+                    <span class="status">In Progress</span>
+                    <div class="progress"><div class="progress-fill"></div></div>
+                    <button class="btn course-btn" type="button">Continue Learning</button>
+                </div>
+
+                <div class="card" data-progress="25">
+                    <h3>Python Programming</h3>
+                    <p>Variables, conditionals, loops, strings, lists, tuples and dictionaries.</p>
+                    <span class="status">In Progress</span>
+                    <div class="progress"><div class="progress-fill"></div></div>
+                    <button class="btn course-btn" type="button">Continue Learning</button>
+                </div>
+
+                <div class="card" data-progress="0">
+                    <h3>Mathematics</h3>
+                    <p>Matrices, differential calculus and integral calculus.</p>
+                    <span class="status">Not Started</span>
+                    <div class="progress"><div class="progress-fill"></div></div>
+                    <button class="btn course-btn" type="button">Continue Learning</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical Capabilities (at least 4 skills) -->
+        <section id="skills">
+            <h2>Core Skills</h2>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS</li>
+                <li>Python</li>
+                <li>Git &amp; GitHub</li>
+                <li>VS Code</li>
+                <li>Linux Terminal</li>
+            </ul>
+        </section>
+
+        <!-- Independent Project List -->
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Student Portfolio Website</h3>
+                    <p>This website, built using HTML and CSS selectors.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Educational Timeline -->
+        <section id="education">
+            <h2>Education</h2>
+            <h3>10th CBSE = 80%</h3>
+            <h3>Bachelor of Science in Computer Science</h3>
+            <p><strong>LPU, Phagwara, Punjab</strong> | <em>Expected Graduation: May 2030</em></p>
+            <ul>
+                <li><strong>Relevant Coursework:</strong> Artificial Intelligence and Machine Learning</li>
+            </ul>
+        </section>
+
+        <!-- Input Form (ID selector #contact) -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>Feel free to reach out for internship opportunities or collaborations.</p>
+
+            <form class="bordered-form" id="contactForm" novalidate>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" placeholder="Your phone number">
+
+                <label for="message">Enter Message:</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Write your message here" maxlength="300"></textarea>
+                <p class="counter" id="counter">0 / 300</p>
+
+                <button class="btn" type="submit">Send Message</button>
+                <p class="form-msg" id="formMsg"></p>
+            </form>
+        </section>
+
+    </main>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Shubh Sharma. All rights reserved.</p>
+        <p>
+            Connect externally via:
+            <a href="https://github.com/shubh-sharma2008">GitHub</a> |
+            <a href="https://linkedin.com/in/shubhsharma">LinkedIn</a> |
+            <a href="tel:7643436656">Mobile Number</a>
+        </p>
+    </footer>
+
+    <!-- =====================================================
+         JAVASCRIPT: makes the website interactive.
+         Uses the DOM: document.getElementById / querySelector,
+         addEventListener, and changes to text, style and classes.
+         ===================================================== -->
+    <script>
+        /* 1. COURSE CARDS: "Continue Learning" button increases progress by 25% */
+        const cards = document.querySelectorAll(".card[data-progress]");
+
+        function showProgress(card) {
+            const value  = Number(card.dataset.progress);          // read data-progress
+            const fill   = card.querySelector(".progress-fill");
+            const status = card.querySelector(".status");
+            const btn    = card.querySelector(".course-btn");
+
+            fill.style.width = value + "%";                         // change bar width
+
+            if (value === 0) {
+                status.textContent = "Not Started";
+            } else if (value < 100) {
+                status.textContent = "In Progress (" + value + "%)";
+            } else {
+                status.textContent = "Completed ✔";
+                btn.textContent = "Course Completed";
+                btn.disabled = true;                                // stop at 100%
+            }
+        }
+
+        cards.forEach(function (card) {
+            showProgress(card);                                     // show starting progress
+            card.querySelector(".course-btn").addEventListener("click", function () {
+                let value = Number(card.dataset.progress) + 25;
+                if (value > 100) value = 100;
+                card.dataset.progress = value;
+                showProgress(card);
+            });
+        });
+
+        /* 2. CONTACT FORM: validate and show a message (page does not reload) */
+        const form    = document.getElementById("contactForm");
+        const msgBox  = document.getElementById("formMsg");
+        const message = document.getElementById("message");
+        const counter = document.getElementById("counter");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();                                 // stop page reload
+
+            const name  = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const text  = message.value.trim();
+            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (name === "" || text === "") {
+                msgBox.textContent = "Please fill in your name and message.";
+                msgBox.className = "form-msg error";
+            } else if (!emailOk) {
+                msgBox.textContent = "Please enter a valid email address.";
+                msgBox.className = "form-msg error";
+            } else {
+                msgBox.textContent = "Thank you, " + name + "! Your message has been sent.";
+                msgBox.className = "form-msg success";
+                form.reset();                                       // clear the form
+                counter.textContent = "0 / 300";
+            }
+        });
+
+        /* 3. CHARACTER COUNTER for the message box */
+        message.addEventListener("input", function () {
+            counter.textContent = message.value.length + " / 300";
+        });
+
+        /* 4. DARK MODE button: toggles class "dark" on <body> */
+        const themeBtn = document.getElementById("themeBtn");
+
+        themeBtn.addEventListener("click", function () {
+            document.body.classList.toggle("dark");
+            themeBtn.textContent = document.body.classList.contains("dark")
+                ? "☀️ Light Mode"
+                : "🌙 Dark Mode";
+        });
+    </script>
+
+</body>
+</html>
